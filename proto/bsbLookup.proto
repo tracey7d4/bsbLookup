@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "new-bsb-lookup/proto/bsbLookup.proto";
+
+package bsbLookup;
+
+service bsbLookup {
+  rpc Validate(ValidateRequest) returns (ValidateResponse) {}
+}
+
+message ValidateRequest {
+  string bsb = 1;
+}
+
+message ValidateResponse {
+  bool valid = 1;
+  string bank_code = 2;
+}
