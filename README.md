@@ -42,3 +42,10 @@
     - define again `Validate` method
   
 - Write test file `service_test.go`
+
+- Come back with `main.go`
+    - dddddd
+
+- Write `tesh.sh`
+    - Start with `#!/bin/sh`
+    - `grpcurl`: give the path where can look for the file to execute (ex. bsbLookup.bsbLookup.Validate)

@@ -37,3 +37,8 @@ func bsbValidate(bsb string) bool {
 	var validBSB = regexp.MustCompile(`^[0-9]{6}$`)
 	return validBSB.MatchString(bsb)
 }
+
+func (s *LookupAPI) UpdateCache() error {
+	s.cache = map[string]string{"638010": "HBL"}
+	return nil
+}
