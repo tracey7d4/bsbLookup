@@ -49,3 +49,7 @@
 - Write `tesh.sh`
     - Start with `#!/bin/sh`
     - `grpcurl`: give the path where can look for the file to execute (ex. bsbLookup.bsbLookup.Validate)
+  
+- Create Dockerfile for service and blackbox_test
+    - Dockerfile start with `FROM golang:1.16.3-alpine3.13` - to inherit the base from golang alpine
+    - Then other commands
