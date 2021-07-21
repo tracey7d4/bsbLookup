@@ -1,5 +1,5 @@
 build-docker:
-	docker-conmpose build bsblookup blackbox
+	docker-compose build bsblookup blackbox
 
 run-docker:
 	docker-compose up blackbox

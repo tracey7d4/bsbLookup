@@ -58,7 +58,8 @@ func (s *LookupAPI) UpdateCache() error {
 
 	csvLines, err := csv.NewReader(csvFile).ReadAll()
 	if err != nil {
-		return status.Error(codes.InvalidArgument, "Error reading csv file")
+		fmt.Println("Error reading csv file")
+		return err
 	}
 	s.cache = make(map[string]string)
 	for _, lines := range csvLines {

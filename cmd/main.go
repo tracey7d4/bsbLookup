@@ -16,7 +16,6 @@ func main() {
 		log.Fatal("Error loading configs file: ", err)
 	}
 	port := configs.Port
-	fmt.Printf("bsb-lookup started on port %v\n", port)
 
 	lis, err := net.Listen("tcp", ":"+fmt.Sprintf("%v",port))
 	if err != nil {
@@ -31,6 +30,7 @@ func main() {
 	}
 	proto.RegisterBsbLookupServer(s, api)
 
+	fmt.Printf("bsb-lookup started on port %v\n", port)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

@@ -34,7 +34,7 @@ func TestBSBLookup(t *testing.T) {
 		},
 		{
 			name:    "unsuccessful - bsb not available",
-			bsb:     "638011",
+			bsb:     "999999",
 			want:    &proto.ValidateResponse{
 				Valid:    false,
 				BankCode: "",
