@@ -12,7 +12,6 @@ import (
 
 func main() {
 	configs, err := config.LoadConfig()
-
 	if err != nil {
 		log.Fatal("Error loading configs file: ", err)
 	}
@@ -23,17 +22,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()
 
-	server := &service.LookupAPI{}
-	if err := server.UpdateCache(); err != nil {
+	s := grpc.NewServer()
+	api := &service.LookupAPI{}
+	if err := api.UpdateCache(); err != nil {
 		return
 	}
-
-	proto.RegisterBsbLookupServer(s, server)
+	proto.RegisterBsbLookupServer(s, api)
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-
 }

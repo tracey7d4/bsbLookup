@@ -1,14 +1,16 @@
 version: "3"
 services:
-  bsbLookup:
+  bsblookup:
     build: .
-    image: newBSBLookup
+    image: newbsblookup
+    container_name: bsblookup
     ports:
       - 8080:8080
   blackbox:
     build:
       context: .
       dockerfile: testing/blackbox/Dockerfile
-    image: newBlackbox
+    image: newblackbox
+    container_name: blackbox
     depends_on:
-      - bsbLookup
+      - bsblookup

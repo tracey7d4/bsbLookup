@@ -11,7 +11,7 @@ import (
 )
 
 func TestBSBLookup(t *testing.T) {
-	cc, err := grpc.Dial("bsbLookup:8080", grpc.WithInsecure())
+	cc, err := grpc.Dial("bsblookup:8080", grpc.WithInsecure())
 	if err != nil {
 		return
 	}

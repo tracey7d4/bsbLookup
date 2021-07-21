@@ -8,6 +8,6 @@ WORKDIR /app
 
 ENV CGO_ENABLED=0
 
-RUN go test -c ./testing/blackbox -o blackbox
+RUN go test -c ./testing/blackbox -o newblackbox
 
-CMD ["/app/blackbox"]
+CMD ["/app/newblackbox"]
