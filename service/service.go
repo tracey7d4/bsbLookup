@@ -9,7 +9,6 @@ import (
 	"google.golang.org/grpc/status"
 	"os"
 	"regexp"
-	"strings"
 )
 
 type LookupAPI struct {
@@ -48,7 +47,7 @@ func bsbValidate(bsb string) bool {
 //}
 
 func (s *LookupAPI) UpdateCache() error {
-	csvFile, err := os.Open("bsbcache.csv")
+	csvFile, err := os.Open("service/data/bsbcache.csv")
 	if err != nil {
 		fmt.Println("Error open csv file")
 		return err
@@ -56,14 +55,16 @@ func (s *LookupAPI) UpdateCache() error {
 	defer func() {
 		_ = csvFile.Close()
 	}()
+
 	csvLines, err := csv.NewReader(csvFile).ReadAll()
 	if err != nil {
 		return status.Error(codes.InvalidArgument, "Error reading csv file")
 	}
-	for _, line := range csvLines {
-		bsb := line[0]
-		strings.Trim(bsb,"-")
-		bankCode := line[1]
+	s.cache = make(map[string]string)
+	for _, lines := range csvLines {
+		line0 := lines[0]
+		bsb := line0[:3]+line0[4:]
+		bankCode := lines[1]
 		if _, ok := s.cache[bsb]; !ok {
 			s.cache[bsb] = bankCode
 		}
