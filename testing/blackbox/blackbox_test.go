@@ -25,10 +25,10 @@ func TestBSBLookup(t *testing.T) {
 	}{
 		{
 			name:    "success",
-			bsb:     "638010",
+			bsb:     "012020",
 			want:    &proto.ValidateResponse{
 				Valid:    true,
-				BankCode: "HBL",
+				BankCode: "ANZ",
 			},
 			wantErr: nil,
 		},

@@ -2,10 +2,14 @@ package service
 
 import (
 	"context"
+	"encoding/csv"
+	"fmt"
 	"github.com/tracey7d4/bsbLookup/proto"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"os"
 	"regexp"
+	"strings"
 )
 
 type LookupAPI struct {
@@ -38,7 +42,31 @@ func bsbValidate(bsb string) bool {
 	return validBSB.MatchString(bsb)
 }
 
+//func (s *LookupAPI) UpdateCache() error {
+//	s.cache = map[string]string{"638010": "HBL"}
+//	return nil
+//}
+
 func (s *LookupAPI) UpdateCache() error {
-	s.cache = map[string]string{"638010": "HBL"}
+	csvFile, err := os.Open("bsbcache.csv")
+	if err != nil {
+		fmt.Println("Error open csv file")
+		return err
+	}
+	defer func() {
+		_ = csvFile.Close()
+	}()
+	csvLines, err := csv.NewReader(csvFile).ReadAll()
+	if err != nil {
+		return status.Error(codes.InvalidArgument, "Error reading csv file")
+	}
+	for _, line := range csvLines {
+		bsb := line[0]
+		strings.Trim(bsb,"-")
+		bankCode := line[1]
+		if _, ok := s.cache[bsb]; !ok {
+			s.cache[bsb] = bankCode
+		}
+	}
 	return nil
 }

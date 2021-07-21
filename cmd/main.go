@@ -26,6 +26,7 @@ func main() {
 	s := grpc.NewServer()
 	api := &service.LookupAPI{}
 	if err := api.UpdateCache(); err != nil {
+		fmt.Println("error reading api cache")
 		return
 	}
 	proto.RegisterBsbLookupServer(s, api)
