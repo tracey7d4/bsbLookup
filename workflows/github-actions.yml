@@ -1,0 +1,15 @@
+name: GitHub Actions
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Start Docker-compose
+        run: docker-compose -f "docker-compose.yml" up -d --build
